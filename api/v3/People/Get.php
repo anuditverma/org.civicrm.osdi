@@ -22,7 +22,6 @@ function _civicrm_api3_people_Get_spec(&$spec) {
  * @throws API_Exception
  */
 function civicrm_api3_people_Get($params) {
- ini_set('display_errors', 'On');
  $array = civicrm_api3('contact', 'get', array());
 
  $array['values'] = array_map(function($item){
