@@ -23,7 +23,28 @@ function _civicrm_api3_people_Get_spec(&$spec) {
  */
 function civicrm_api3_people_Get($params) {
  $array = civicrm_api3('contact', 'get', array());
+ 
+ /*
+ {
+    "_embedded": {
+      "osdi:people": [
+ 
+      <?php for each item in array....?>
+      {
+                "identifiers": [
+                    "civicrm:$id_value",
+                ],
+                "origin_system": "CiviCRM",
+                "given_name": "$item['first_name']",
+                "family_name": "$item['last_name']",
+                //etc...
 
+      }
+      <? end for loop ?>
+    ]
+    }
+ }*/
+ 
  $array['values'] = array_map(function($item){
   $item['given_name'] = $item['first_name'];      
   unset($item['first_name']);
