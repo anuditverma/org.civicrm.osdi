@@ -94,6 +94,8 @@ function civicrm_api3_people_Get($params) {
                          'country' => $value2['country'],
                          'id' => $value2['id'],
                          /*
+                          Get.php V2
+                          Reformaatting CiviCRM fields into OSDI without rearrangement of the elememt_IDs  
                          'OSDI_Field' => $value2['CiviCRM_Field'],
                          */
                          );
