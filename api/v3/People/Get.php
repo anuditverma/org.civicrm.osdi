@@ -47,5 +47,6 @@ function civicrm_api3_people_Get($params) {
   return $item;
 }, $array['values']);
 
- print_r($array);
+ print_r($array); //CiviCRM standrad to be followed for return statements
+  
 }
