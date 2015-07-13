@@ -102,5 +102,5 @@ function civicrm_api3_people_Get($params) {
               }
     }
 
- print_r($display);
+ echo json_encode($display); //For returning the JSON representation of a value
 }
