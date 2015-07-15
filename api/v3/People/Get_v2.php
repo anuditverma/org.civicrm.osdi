@@ -97,8 +97,7 @@ function civicrm_api3_people_Get($params) {
                          'OSDI_Field' => $value2['CiviCRM_Field'],
                          */
                          );
-              }
     }
-
- echo json_encode($array); //For returning the JSON representation of a value
+                         
+ return (civicrm_api3_create_success($array, 'People', 'get')); //Added CiviCRM coding standard
 }
