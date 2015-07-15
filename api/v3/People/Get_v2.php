@@ -23,10 +23,8 @@ function _civicrm_api3_people_Get_spec(&$spec) {
  */
 function civicrm_api3_people_Get($params) {
  $array = civicrm_api3('contact', 'get', array());
- $display=array();
-    foreach ($array as $value) {
-      foreach ($value as $value2) {
-        $display [] = array (
+    foreach($array['values'] as $key => $value){
+       $default[$key] = array(
                          'contact_id' => $value2['contact_id'],
                          'contact_type' => $value2['contact_type'],
                          'contact_sub_type' => $value2['contact_sub_type'],
@@ -102,5 +100,5 @@ function civicrm_api3_people_Get($params) {
               }
     }
 
- echo json_encode($display); //For returning the JSON representation of a value
+ echo json_encode($array); //For returning the JSON representation of a value
 }
