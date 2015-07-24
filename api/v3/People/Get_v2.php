@@ -93,11 +93,11 @@ function civicrm_api3_people_Get($params) {
                          'id' => $value2['id'],
                          /*
                           Get.php V2
-                          Reformaatting CiviCRM fields into OSDI without rearrangement of the elememt_IDs  
+                          Reformatting CiviCRM fields into OSDI without rearrangement of the elememt_IDs  
                          'OSDI_Field' => $value2['CiviCRM_Field'],
                          */
                          );
     }
                          
- return (civicrm_api3_create_success($array, 'People', 'get')); //Added CiviCRM coding standard
+ return (civicrm_api3_create_success($default, 'People', 'get')); //Added CiviCRM coding standard
 }
