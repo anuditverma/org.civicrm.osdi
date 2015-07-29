@@ -3,47 +3,52 @@ require_once '/opt/buildkit/build/dmaster/sites/all/libraries/vendor/autoload.ph
 
 use Nocarrier\Hal;
 
+$json = file_get_contents('http://localhost:8001/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&options[limit]=25&options[offset]=50&json={%22sequential%22:1,%22return%22:%22magicword%22,%22magicword%22:%22sesame%22}&api_key=verma110092&key=ALrqOR1p1YAmjcV1');
+
+$array = json_decode($json, true);
+
 $hal = new \Nocarrier\Hal('/sites/default/ext/org.civicrm.osdi/api/v3/People/', ['per_page' => 25,'page' => 1,'total_records' => 25]);
 
+for ($i = 1; $i <= 25; $i++){
 $resource = new \Nocarrier\Hal(
-    '/People?contact_id=x',
+    '/People?contact_id='.$array['values'][$i]['contact_id'],
     array(
-    	'given_name' => 'first_name',
-    	'family_name' => 'last_name',
+        'given_name' => $array['values'][$i]['given_name'],
+        'family_name' => $array['values'][$i]['family_name'],
         'email_addresses' => array(
-        	'primary' => true,
-        	'address' => 'foo@bar.com'),
-        'identifiers' => array('osdi-person-X'),
-        'id'=> 'X',
+            'primary' => true,
+            'address' => $array['values'][$i]['email']),
+        'identifiers' => array('osdi-person-'.'['.$i.']'),
+        'id'=> $array['values'][$i]['contact_id'],
         'created_date' => date("Y/m/d"),
         'modified_date' => date("Y/m/d"),
         'custom_fields' => array(
-        	'email' => 'foo@bar.com',
-        	'full_name' => 'Full Name',
-        	'event_code' => 'xx',
-        	'address' => 'Address',
-        	'zip' => 'zip-code',
-        	'pledge' => 'num'),
+            'email' => $array['values'][$i]['email'],
+            'full_name' => $array['values'][$i]['given_name'].' '.$array['values'][$i]['family_name'],
+            'event_code' => 'xx',
+            'address' => $array['values'][$i]['postal_addresses'],
+            'zip' => $array['values'][$i]['zip_code'],
+            'pledge' => 'num'),
         'postal_addresses' => array(
-        	array(
-        	'address_lines' => array(null),
-        	'postal_code' => 'Postal Code',
-        	'address_status' => 'Verified/Not Verified',
-        	'primary' => 'True/False',)),
+            array(
+            'address_lines' => array(null),
+            'postal_code' => $array['values'][$i]['zip_code'],
+            'address_status' => 'Verified/Not Verified',
+            'primary' => 'True/False',)),
         'phone_numbers' => array(
-        	array(
-        	'number' => 'Phone number',)),
+            array(
+            'number' => $array['values'][$i]['number'],)),
         '_embedded' => array(
-        	'osdi:tags' => array())
-   		)
-	);
+            'osdi:tags' => array())
+        )
+    );
+
 
 $resource->addLink('addresses', 'http://api.opensupporter.org/api/v1/people/X/addresses');
 $resource->addLink('question_answers', 'http://api.opensupporter.org/api/v1/people/X/question_answers');
 $resource->addLink('self', 'http://api.opensupporter.org/api/v1/people/X');
 $resource->addLink('osdi-tags', 'http://api.opensupporter.org/api/v1/people/X/tags');
 
-for ($i = 0; $i <= 25; $i++) {
 $hal->addResource('osdi-people', $resource);
 }
 
