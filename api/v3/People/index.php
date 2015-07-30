@@ -1,9 +1,9 @@
 <?php
-require_once '/opt/buildkit/build/dmaster/sites/all/libraries/vendor/autoload.php';
+require_once '/srv/www/buildkit/build/drupal-demo/sites/all/libraries/vendor/autoload.php';
 
 use Nocarrier\Hal;
 
-$json = file_get_contents('http://localhost:8001/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&options[limit]=25&options[offset]=50&json={%22sequential%22:1,%22return%22:%22magicword%22,%22magicword%22:%22sesame%22}&api_key=verma110092&key=ALrqOR1p1YAmjcV1');
+$json = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={%22sequential%22:1,%22magicword%22:%22seasme%22}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
 
 $array = json_decode($json, true);
 
