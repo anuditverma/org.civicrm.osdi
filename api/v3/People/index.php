@@ -3,13 +3,19 @@ require_once '/srv/www/buildkit/build/drupal-demo/sites/all/libraries/vendor/aut
 
 use Nocarrier\Hal;
 
-$json = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={%22sequential%22:1,%22magicword%22:%22seasme%22}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+$json = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={"sequential":1}&options[limit]=0&&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+
+$json2 = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=DashboardContact&action=get&json={"sequential":1}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+
+
 
 $array = json_decode($json, true);
+$array2 = json_decode($json2, true);
 
-$hal = new \Nocarrier\Hal('/sites/default/ext/org.civicrm.osdi/api/v3/People/', ['per_page' => 25,'page' => 1,'total_records' => 25]);
+$hal = new \Nocarrier\Hal('/sites/default/ext/org.civicrm.osdi/api/v3/People/', ['per_page' => 236,'page' => 1,'total_records' => 236]);
 
-for ($i = 1; $i <= 25; $i++){
+foreach($array['values'] as $key => $value){
+    $i = $array['values'][$key]['contact_id'];
 $resource = new \Nocarrier\Hal(
     '/People?contact_id='.$array['values'][$i]['contact_id'],
     array(
@@ -20,7 +26,7 @@ $resource = new \Nocarrier\Hal(
             'address' => $array['values'][$i]['email']),
         'identifiers' => array('osdi-person-'.'['.$i.']'),
         'id'=> $array['values'][$i]['contact_id'],
-        'created_date' => date("Y/m/d"),
+        'created_date' => $array2['values'][$i]['created_date'],
         'modified_date' => date("Y/m/d"),
         'custom_fields' => array(
             'email' => $array['values'][$i]['email'],
