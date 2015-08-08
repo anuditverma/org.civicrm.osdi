@@ -17,7 +17,7 @@ $key = $_GET['id'];
 $key--;
 $i = $array['values'][$key]['contact_id'];
 
-$hal = new \Nocarrier\Hal('/sites/default/ext/org.civicrm.osdi/api/v3/People/person.php'.'?id='.$i,
+$hal = new \Nocarrier\Hal('/sites/default/ext/osdi/api/v3/People/person.php'.'?id='.$i,
    ['given_name' => $array['values'][$key]['given_name'],
     'family_name' => $array['values'][$key]['family_name'],
     'email_addresses' => array(
@@ -31,12 +31,17 @@ $hal = new \Nocarrier\Hal('/sites/default/ext/org.civicrm.osdi/api/v3/People/per
         'email' => $array['values'][$key]['email'],
         'full_name' => $array['values'][$key]['given_name'].' '.$array['values'][$key]['family_name'],
         'event_code' => 'xx',
-        'address' => $array['values'][$key]['postal_addresses'],
-        'zip' => $array['values'][$key]['zip_code'],
+        'address' => null,
+        'zip' => null,
         'pledge' => $array3['values'][$i]['pledge_id']),
     'postal_addresses' => array(
         array(
-        'address_lines' => array(null),
+        'address_lines' => array(
+            array($array['values'][$key]['postal_addresses'],
+                  $array['values'][$key]['supplemental_address_1'],
+                  $array['values'][$key]['supplemental_address_2'],
+                  $array['values'][$key]['state_province'].', '.$array['values'][$key]['country']),
+                ),
         'postal_code' => $array['values'][$key]['zip_code'],
         'address_status' => 'Verified/Not Verified',
         'primary' => 'True/False',)),
@@ -44,5 +49,4 @@ $hal = new \Nocarrier\Hal('/sites/default/ext/org.civicrm.osdi/api/v3/People/per
         array(
         'number' => $array['values'][$key]['number'],))]
  );
-
 echo $hal->asJson();
