@@ -15,7 +15,7 @@ $array3 = json_decode($json3, true);
 
 $count=sizeof($array['values']);
 
-$hal = new \Nocarrier\Hal('/sites/default/ext/org.civicrm.osdi/api/v3/People/', ['per_page' => $count,'page' => 1,'total_records' => $count]);
+$hal = new \Nocarrier\Hal('/sites/default/ext/osdi/api/v3/People/index.php', ['per_page' => $count,'page' => 1,'total_records' => $count]);
 
 foreach($array['values'] as $key => $value){
     $i = $array['values'][$key]['contact_id'];
@@ -50,7 +50,7 @@ $resource = new \Nocarrier\Hal(
         )
     );
 
-$resource->addLink('self', 'http://api.opensupporter.org/api/v1/people/X');
+$resource->addLink('self', '/sites/default/ext/osdi/api/v3/People/person.php'.'?id='.$i);
 
 $hal->addResource('osdi-people', $resource);
 }
