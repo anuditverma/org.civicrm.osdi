@@ -46,17 +46,11 @@ $resource = new \Nocarrier\Hal(
             'primary' => 'True/False',)),
         'phone_numbers' => array(
             array(
-            'number' => $array['values'][$key]['number'],)),
-        '_embedded' => array(
-            'osdi:tags' => array())
+            'number' => $array['values'][$key]['number'],))
         )
     );
 
-
-$resource->addLink('addresses', 'http://api.opensupporter.org/api/v1/people/X/addresses');
-$resource->addLink('question_answers', 'http://api.opensupporter.org/api/v1/people/X/question_answers');
 $resource->addLink('self', 'http://api.opensupporter.org/api/v1/people/X');
-$resource->addLink('osdi-tags', 'http://api.opensupporter.org/api/v1/people/X/tags');
 
 $hal->addResource('osdi-people', $resource);
 }
