@@ -1,4 +1,7 @@
 <?php
+
+header("Content-Type:application/hal+json");
+
 require_once '/srv/www/buildkit/build/drupal-demo/sites/all/libraries/vendor/autoload.php';
 
 use Nocarrier\Hal;
