@@ -20,9 +20,10 @@ $i = $array['values'][$key]['contact_id'];
 $hal = new \Nocarrier\Hal('/sites/default/ext/osdi/api/v3/People/person.php'.'?id='.$i,
    ['given_name' => $array['values'][$key]['given_name'],
     'family_name' => $array['values'][$key]['family_name'],
-    'email_addresses' => array(
-        'primary' => true,
-    'address' => $array['values'][$key]['email']),
+        'email_addresses' => array(
+            array(
+                'primary' => true,
+                'address' => $array['values'][$key]['email'])),
     'identifiers' => array('civi_crm:'.$i),
     'id'=> $array['values'][$key]['contact_id'],
     'created_date' => $array2['values'][$i]['created_date'],
