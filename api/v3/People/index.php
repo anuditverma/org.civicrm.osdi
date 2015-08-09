@@ -25,8 +25,9 @@ $resource = new \Nocarrier\Hal(
         'given_name' => $array['values'][$key]['given_name'],
         'family_name' => $array['values'][$key]['family_name'],
         'email_addresses' => array(
-            'primary' => true,
-            'address' => $array['values'][$key]['email']),
+            array(
+                'primary' => true,
+                'address' => $array['values'][$key]['email'])),
         'identifiers' => array('civi_crm:'.$i),
         'id'=> $array['values'][$key]['contact_id'],
         'created_date' => $array2['values'][$i]['created_date'],
