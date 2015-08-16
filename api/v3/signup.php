@@ -15,14 +15,13 @@ $phone_numbers = $received->{"phone_numbers"};
 $gender = $received->{"gender"};
 
 $postData= array(
-    'family_name' => $family_name,
-    'given_name' => $given_name,
     'contact_type' => $contact_type,
-    'additional_name' => $additional_name,
-    'origin_system' => $email_addresses,
-    'email_addresses' => $email_addresses,
-    'postal_addresses' => $postal_addresses,
-    'phone_numbers' => $phone_numbers,
+    'first_name' => $given_name,
+    'middle_name' => $additional_name,
+    'last_name' => $family_name,
+    'email' => $email_addresses,
+    'street_address' => $postal_addresses,
+    'phone' => $phone_numbers,
     'gender' => $gender,
 );
 //Right now only for given & family name and contact type 
