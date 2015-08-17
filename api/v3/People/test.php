@@ -4,20 +4,19 @@ $json = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/e
 
 $array = json_decode($json, true);
 
-function array_walk_recursive_delete(array &$array, callable $callback, $userdata = null)
-{
-    foreach($array['values'] as $key => $value) {
-        if (is_array($value)) {
-            $value = array_walk_recursive_delete($value, $callback, $userdata);
-        }
-        if ($callback($value, $key, $userdata)) {
-            unset($array[$key]);
-        }
+$ff = array_filter_recursive($array);
+echo json_encode($ff);
+
+function array_filter_recursive($input, $callback = null) {
+    if (!is_array($input)) {
+        return $input;
     }
-
-    return $array;
+    if (null === $callback) {
+        $callback = function ($v) { return !empty($v);};
+    }
+    $input = array_map(function($v) use ($callback) { return array_filter_recursive($v, $callback); }, $input);
+    return array_filter($input, $callback);
 }
-
 
 
 $result = array_walk_recursive_delete($array, function ($value, $key) {
@@ -26,7 +25,3 @@ $result = array_walk_recursive_delete($array, function ($value, $key) {
          }
             return ($value === null);
         });
-
-
-
-echo json_encode($result);
