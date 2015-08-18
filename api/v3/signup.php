@@ -25,7 +25,7 @@ $postData= array(
     'gender' => $gender,
 );
 //Right now only for given & family name and contact type 
-$ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=create&json={"sequential":1,"contact_type":'.$contact_type.',"first_name":'.$family_name.',"last_name":'.$last_name.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+$ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=create&json={"sequential":1,"contact_type":"'.$contact_type.'","first_name":"'.$given_name.'","last_name":"'.$family_name.'"}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
 curl_setopt_array($ch, array(
     CURLOPT_POST => TRUE,
     CURLOPT_RETURNTRANSFER => TRUE,
