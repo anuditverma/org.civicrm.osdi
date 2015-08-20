@@ -25,8 +25,8 @@ foreach($array['values'] as $key => $value){
  $resource = new \Nocarrier\Hal(
     '/People?contact_id='.$array['values'][$key]['contact_id'],
     array(
-        'given_name' => $newarray['values'][$key]['given_name'],
-        'family_name' => $newarray['values'][$key]['family_name'],
+        'given_name' => $array['values'][$key]['given_name'],
+        'family_name' => $array['values'][$key]['family_name'],
         'email_addresses' => array(
             array(
                 'primary' => true,
