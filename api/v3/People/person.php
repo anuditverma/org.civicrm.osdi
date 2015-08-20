@@ -32,25 +32,23 @@ $hal = new \Nocarrier\Hal('/sites/default/ext/osdi/api/v3/People/person.php'.'?i
     'created_date' => date("c", strtotime($array2['values'][$i]['created_date'])),
     'modified_date' => date("c", strtotime($array2['values'][$i]['modified_date'])),
     'custom_fields' => array(
-        'email' => $array['values'][$key]['email'],
-        'full_name' => $array['values'][$key]['given_name'].' '.$array['values'][$key]['family_name'],
-        'event_code' => 'xx',
-        'address' => null,
-        'zip' => null,
-        'pledge' => $array3['values'][$i]['pledge_id']),
+            'email' => null,
+            'full_name' => null,
+            'event_code' => 'xx',
+            'address' => null,
+            'zip' => null,
+            'pledge' => $array3['values'][$i]['pledge_id']),
     'postal_addresses' => array(
-        array(
-        'address_lines' => array(
-            array($array['values'][$key]['postal_addresses'],
-                  $array['values'][$key]['supplemental_address_1'],
-                  $array['values'][$key]['supplemental_address_2'],
-                  $array['values'][$key]['state_province'].', '.$array['values'][$key]['country']),
+            array(
+            'address_lines' => array(
+                array($array['values'][$key]['postal_addresses']),
                 ),
-        'postal_code' => $array['values'][$key]['zip_code'],
-        'address_status' => 'Verified/Not Verified',
-        'primary' => 'True/False',)),
+    'postal_code' => $array['values'][$key]['zip_code'],
+    'address_status' => 'Verified/Not Verified',
+    'primary' => 'True/False',)),
     'phone_numbers' => array(
         array(
         'number' => $array['values'][$key]['number'],))]
  );
+
 echo $hal->asJson();
