@@ -2,19 +2,11 @@
 
 header("Content-Type:application/hal+json");
 
+include 'blank.php';
+
 require_once '/srv/www/buildkit/build/drupal-demo/sites/all/libraries/vendor/autoload.php';
 
 use Nocarrier\Hal;
-
-$json = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={"sequential":1}&options[limit]=0&&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
-
-$json2 = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=DashboardContact&action=get&json={"sequential":1}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
-
-$json3 = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Pledge&action=get&json={"sequential":1}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
-
-$array = json_decode($json, true);
-$array2 = json_decode($json2, true);
-$array3 = json_decode($json3, true);
 
 $count=sizeof($array['values']);
 
@@ -35,13 +27,7 @@ foreach($array['values'] as $key => $value){
         'id'=> $array['values'][$key]['contact_id'],
         'created_date' => date("c", strtotime($array2['values'][$i]['created_date'])),
         'modified_date' => date("c", strtotime($array2['values'][$i]['modified_date'])),
-        'custom_fields' => array(
-            'email' => null,
-            'full_name' => null,
-            'event_code' => 'xx',
-            'address' => null,
-            'zip' => null,
-            'pledge' => $array3['values'][$i]['pledge_id']),
+        'custom_fields' => array(),
         'postal_addresses' => array(
             array(
             'address_lines' => array(
