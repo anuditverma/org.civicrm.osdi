@@ -22,11 +22,11 @@ $hal = new \Nocarrier\Hal('/sites/default/ext/osdi/api/v3/People/index.php', ['p
 
 foreach($array['values'] as $key => $value){
     $i = $array['values'][$key]['contact_id'];
-$resource = new \Nocarrier\Hal(
+ $resource = new \Nocarrier\Hal(
     '/People?contact_id='.$array['values'][$key]['contact_id'],
     array(
-        'given_name' => $array['values'][$key]['given_name'],
-        'family_name' => $array['values'][$key]['family_name'],
+        'given_name' => $newarray['values'][$key]['given_name'],
+        'family_name' => $newarray['values'][$key]['family_name'],
         'email_addresses' => array(
             array(
                 'primary' => true,
@@ -36,8 +36,8 @@ $resource = new \Nocarrier\Hal(
         'created_date' => date("c", strtotime($array2['values'][$i]['created_date'])),
         'modified_date' => date("c", strtotime($array2['values'][$i]['modified_date'])),
         'custom_fields' => array(
-            'email' => $array['values'][$key]['email'],
-            'full_name' => $array['values'][$key]['given_name'].' '.$array['values'][$key]['family_name'],
+            'email' => null,
+            'full_name' => null,
             'event_code' => 'xx',
             'address' => null,
             'zip' => null,
@@ -45,10 +45,7 @@ $resource = new \Nocarrier\Hal(
         'postal_addresses' => array(
             array(
             'address_lines' => array(
-                array($array['values'][$key]['postal_addresses'],
-                    $array['values'][$key]['supplemental_address_1'],
-                    $array['values'][$key]['supplemental_address_2'],
-                    $array['values'][$key]['state_province'].', '.$array['values'][$key]['country']),
+                array($array['values'][$key]['postal_addresses']),
                 ),
             'postal_code' => $array['values'][$key]['zip_code'],
             'address_status' => 'Verified/Not Verified',
@@ -63,5 +60,7 @@ $resource->addLink('self', '/sites/default/ext/osdi/api/v3/People/person.php'.'?
 
 $hal->addResource('osdi-people', $resource);
 }
+$hal->addLink('next', '/sites/default/ext/osdi/api/v3/People'.'?page='.($page+1));
+$hal->addLink('previous', '/sites/default/ext/osdi/api/v3/People'.'?page='.($page-1));
 
 echo $hal->asJson();
