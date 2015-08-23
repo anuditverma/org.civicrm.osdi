@@ -4,6 +4,8 @@ header("Content-Type:application/hal+json");
 
 include 'blank.php';
 
+include 'country_codes.php';
+
 require_once '/srv/www/buildkit/build/drupal-demo/sites/all/libraries/vendor/autoload.php';
 
 use Nocarrier\Hal;
@@ -36,7 +38,7 @@ foreach($array['values'] as $key => $value){
             'locality' => $array['values'][$key]['city'],
             'region' => $array['values'][$key]['state_province_name'],
             'postal_code' => $array['values'][$key]['postal_code'],
-            'country'=> $array['values'][$key]['country'],
+             'country'=> array_search($array['values'][$key]['country'], $countrycodes),
             'primary' => filter_var($array3['values'][$key]['is_primary'], FILTER_VALIDATE_BOOLEAN))),
         'phone_numbers' => array(
             array(
