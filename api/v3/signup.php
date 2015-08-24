@@ -1,10 +1,9 @@
 <?php 
 
 header("Content-type: application/json"); 
-
+$received = 0;
 $received = json_decode(file_get_contents('php://input'));
 
-$contact_type = $received->{"contact_type"};
 $family_name = $received->{"family_name"};
 $additional_name = $received->{"additional_name"};
 $given_name = $received->{"given_name"};
@@ -14,10 +13,8 @@ $postal_addresses = $received->{"postal_addresses"};
 $phone = $received->{"phone"};
 $gender = $received->{"gender"};
 $action = $received->{"action"};
-$id = $received->{"id"};
 
 $data= array(
-    'contact_type' => $contact_type,
     'first_name' => $given_name,
     'middle_name' => $additional_name,
     'last_name' => $family_name,
@@ -26,59 +23,9 @@ $data= array(
     'street_address' => $postal_addresses,
     'phone' => $phone,
     'gender' => $gender,
-    'action' => $action,
-    'id' => $id,
 );
 
-//DELETE
-if($action == "delete"){
-
-    $ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=delete&json={"sequential":1,"id":'.$id.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
-
- curl_setopt_array($ch, array(   
-    CURLOPT_CUSTOMREQUEST => "DELETE",
-    CURLOPT_HEADER => false,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_HTTPHEADER => array(
-        //'Authorization: '.$authToken,
-        'Content-Type: application/json'
-    )));
-
-$response = curl_exec($ch);
-
-if($response === FALSE){
-    die(curl_error($ch));
-    }
-}
-
-//PUT
-elseif($action == "put"){
-
-$ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=create&json={"sequential":1,"id":'.$id.',"first_name":"'.$given_name.'","last_name":"'.$family_name.'"}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
-
-curl_setopt_array($ch, array(
-    CURLOPT_CUSTOMREQUEST => "PUT",
-    CURLOPT_HEADER => FALSE,
-    CURLOPT_RETURNTRANSFER => TRUE,
-    CURLOPT_HTTPHEADER => array(
-        //'Authorization: '.$authToken,
-        'Content-Type: application/json'
-    ),
-    CURLOPT_POSTFIELDS, http_build_query($data)
-));
-
-$response = curl_exec($ch);
-
-if($response === FALSE){
-    die(curl_error($ch));
-    }
-
-}
-
-//POST
-elseif ($action == "post") {
-
- $ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=create&json={"sequential":1,"contact_type":"'.$contact_type.'","first_name":"'.$given_name.'","middle_name":"'.$additional_name.'","last_name":"'.$family_name.'","gender_id":"'.$gender.'","api.Address.create":{"location_type_id":"'.$location_type_id.'","street_address":"'.$postal_addresses.'"},"api.Email.create":{"email":"'.$email.'"},"api.Phone.create":{"phone":'.$phone.'}}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+ $ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=create&json={"sequential":1,"contact_type":"Individual","first_name":"'.$given_name.'","middle_name":"'.$additional_name.'","last_name":"'.$family_name.'","gender_id":"'.$gender.'","api.Address.create":{"location_type_id":"'.$location_type_id.'","street_address":"'.$postal_addresses.'"},"api.Email.create":{"email":"'.$email.'"},"api.Phone.create":{"phone":'.$phone.'}}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
 
 curl_setopt_array($ch, array(
     CURLOPT_POST => TRUE,
@@ -95,20 +42,13 @@ $response = curl_exec($ch);
 if($response === FALSE){
     die(curl_error($ch));
 }
-}
 
-if($action == "delete"){
-    echo "Record has been deleted";
-}
-elseif ($action == "put") {
-    echo "Record has been updated";
-}
-elseif ($action == "post") {
+if ($received != 0) {
     echo "These response are added in the ";
     print_r($data);
 }
 else{
-    echo "Choose an action";
+    echo "Please pass the data in JSON format";
 }
 
 ?>
