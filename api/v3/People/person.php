@@ -8,6 +8,79 @@ require_once '/srv/www/buildkit/build/drupal-demo/sites/all/libraries/vendor/aut
 
 use Nocarrier\Hal;
 
+$received = json_decode(file_get_contents('php://input'));
+
+$contact_type = $received->{"contact_type"};
+$family_name = $received->{"family_name"};
+$additional_name = $received->{"additional_name"};
+$given_name = $received->{"given_name"};
+$email = $received->{"email"};
+$location_type_id = $received->{"location_type_id"};
+$postal_addresses = $received->{"postal_addresses"};
+$phone = $received->{"phone"};
+$gender = $received->{"gender"};
+$action = $received->{"action"};
+$id = $received->{"id"};
+
+$data= array(
+    'contact_type' => $contact_type,
+    'first_name' => $given_name,
+    'middle_name' => $additional_name,
+    'last_name' => $family_name,
+    'email' => $email,
+    'location_type_id' => $location_type_id,
+    'street_address' => $postal_addresses,
+    'phone' => $phone,
+    'gender' => $gender,
+    'action' => $action,
+    'id' => $id,
+);
+
+//DELETE
+if($action == "delete"){
+
+    $ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=delete&json={"sequential":1,"id":'.$id.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+
+ curl_setopt_array($ch, array(   
+    CURLOPT_CUSTOMREQUEST => "DELETE",
+    CURLOPT_HEADER => false,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPHEADER => array(
+        //'Authorization: '.$authToken,
+        'Content-Type: application/json'
+    )));
+
+$response = curl_exec($ch);
+
+if($response === FALSE){
+    die(curl_error($ch));
+    }
+}
+
+//PUT
+elseif($action == "put"){
+
+$ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=create&json={"sequential":1,"id":'.$id.',"contact_type":"Individual","first_name":"'.$given_name.'","middle_name":"'.$additional_name.'","last_name":"'.$family_name.'","gender_id":"'.$gender.'","api.Address.create":{"location_type_id":"'.$location_type_id.'","street_address":"'.$postal_addresses.'"},"api.Email.create":{"email":"'.$email.'"},"api.Phone.create":{"phone":'.$phone.'}}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+
+curl_setopt_array($ch, array(
+    CURLOPT_CUSTOMREQUEST => "PUT",
+    CURLOPT_HEADER => FALSE,
+    CURLOPT_RETURNTRANSFER => TRUE,
+    CURLOPT_HTTPHEADER => array(
+        //'Authorization: '.$authToken,
+        'Content-Type: application/json'
+    ),
+    CURLOPT_POSTFIELDS, http_build_query($data)
+));
+
+$response = curl_exec($ch);
+
+if($response === FALSE){
+    die(curl_error($ch));
+    }
+
+}
+
 $id = $_GET['id'];
 
 $json = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={"sequential":1,"id":'.$id.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
