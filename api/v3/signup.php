@@ -12,7 +12,10 @@ $location_type_id = $received->{"location_type_id"};
 $postal_addresses = $received->{"postal_addresses"};
 $phone = $received->{"phone"};
 $gender = $received->{"gender"};
-$action = $received->{"action"};
+
+if ($location_type_id == "") {
+    $location_type_id = "Main";
+}
 
 $data= array(
     'first_name' => $given_name,
