@@ -7,8 +7,9 @@ include 'country_codes.php';
 require_once '/srv/www/buildkit/build/drupal-demo/sites/all/libraries/vendor/autoload.php';
 
 use Nocarrier\Hal;
-
+//Receive JSON body and requests
 $received = json_decode(file_get_contents('php://input'));
+$method = $_SERVER['REQUEST_METHOD'];
 
 $contact_type = $received->{"contact_type"};
 $family_name = $received->{"family_name"};
@@ -19,7 +20,6 @@ $location_type_id = $received->{"location_type_id"};
 $postal_addresses = $received->{"postal_addresses"};
 $phone = $received->{"phone"};
 $gender = $received->{"gender"};
-$action = $received->{"action"};
 $id = $received->{"id"};
 
 $data= array(
@@ -37,7 +37,7 @@ $data= array(
 );
 
 //DELETE
-if($action == "delete"){
+if($method == "DELETE"){
 
     $ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=delete&json={"sequential":1,"id":'.$id.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
 
@@ -58,7 +58,7 @@ if($response === FALSE){
 }
 
 //PUT
-elseif($action == "put"){
+elseif($method == "PUT"){
 
 $ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=create&json={"sequential":1,"id":'.$id.',"contact_type":"Individual","first_name":"'.$given_name.'","middle_name":"'.$additional_name.'","last_name":"'.$family_name.'","gender_id":"'.$gender.'","api.Address.create":{"location_type_id":"'.$location_type_id.'","street_address":"'.$postal_addresses.'"},"api.Email.create":{"email":"'.$email.'"},"api.Phone.create":{"phone":'.$phone.'}}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
 
@@ -85,9 +85,12 @@ $id = $_GET['id'];
 
 $json = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={"sequential":1,"id":'.$id.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
 
+$json2 = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=DashboardContact&action=get&json={"sequential":1,"id":'.$id.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+
 $json3 = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Address&action=get&json={"sequential":1,"id":'.$id.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
 
 $array = json_decode($json, true);
+$array2 = json_decode($json2, true);
 $array3 = json_decode($json3, true);
 
 foreach($array['values'] as $key => $value){
@@ -100,8 +103,8 @@ $hal = new \Nocarrier\Hal('/sites/default/ext/osdi/api/v3/People/person.php'.'?i
                 'address' => $array['values'][$key]['email'])),
     'identifiers' => array('civi_crm:'.$id),
     'id'=> $array['values'][$key]['contact_id'],
-    'created_date' => date("c", strtotime($array2['values'][$i]['created_date'])),
-    'modified_date' => date("c", strtotime($array2['values'][$i]['modified_date'])),
+    'created_date' => date("c", strtotime($array2['values'][$key]['created_date'])),
+    'modified_date' => date("c", strtotime($array2['values'][$key]['modified_date'])),
     'custom_fields' => array(),
     'postal_addresses' => array(
          array(
