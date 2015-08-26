@@ -22,6 +22,10 @@ $phone = $received->{"phone"};
 $gender = $received->{"gender"};
 $id = $received->{"id"};
 
+if ($location_type_id == "") {
+    $location_type_id = "Home";
+}
+
 $data= array(
     'contact_type' => $contact_type,
     'first_name' => $given_name,
