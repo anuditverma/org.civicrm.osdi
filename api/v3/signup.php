@@ -14,7 +14,7 @@ $phone = $received->{"phone"};
 $gender = $received->{"gender"};
 
 if ($location_type_id == "") {
-    $location_type_id = "Main";
+    $location_type_id = "Home";
 }
 
 $data= array(
