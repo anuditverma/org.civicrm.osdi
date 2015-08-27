@@ -6,10 +6,10 @@ With the implementation of the OSDI API by an organization using CiviCRM, and co
 
 * [Overview](https://github.com/anuditverma/org.civicrm.osdi#overview)
 * [Benefits of a common API](https://github.com/anuditverma/org.civicrm.osdi#benefits-of-a-common-api)
-* [About](https://github.com/anuditverma/org.civicrm.osdi/blob/master/README.md#about-orgcivicrmosdi-extension)
-* [Getting Started](https://github.com/anuditverma/org.civicrm.osdi/blob/master/README.md#getting-started)
-* [Usage](https://github.com/anuditverma/org.civicrm.osdi/blob/master/README.md#usage)
-* [Updating](https://github.com/anuditverma/org.civicrm.osdi/blob/master/README.md#updating)
+* [About](https://github.com/anuditverma/org.civicrm.osdi#about-orgcivicrmosdi-extension)
+* [Getting Started](https://github.com/anuditverma/org.civicrm.osdi#getting-started)
+* [Usage](https://github.com/anuditverma/org.civicrm.osdi#usage)
+* [Updating](https://github.com/anuditverma/org.civicrm.osdi#updating)
 
 ## Overview
 
