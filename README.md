@@ -101,6 +101,6 @@ To update the extension follow the steps,
 - Re-install and enable the extension again.
 
 ## See also
-- Project discussion on the CiviCRM developer's forum [here.](https://forum.civicrm.org/index.php?topic=36374.0)
-- Featured introductory [blog post](https://civicrm.org/blogs/anudit-verma/implementing-open-supporter-data-interface-osdi-api-civicrm) on the CiviCRM blog for getting insight on OSDI and CiviCRM community bonding.
-- About [OSDI](http://opensupporter.org/) and follow its [documentation.](http://opensupporter.github.io/osdi-docs/)
+- Project discussion thread on the CiviCRM developer's forum [here.](https://forum.civicrm.org/index.php?topic=36374.0)
+- Featured introductory [blog post](https://civicrm.org/blogs/anudit-verma/implementing-open-supporter-data-interface-osdi-api-civicrm) on the CiviCRM blog for getting an insight on OSDI and CiviCRM community bonding.
+- Know more about [OSDI](http://opensupporter.org/) and follow its [documentation.](http://opensupporter.github.io/osdi-docs/)
