@@ -3,13 +3,14 @@
 header("Content-Type:application/hal+json");
 
 include 'country_codes.php';
-
+////ADD your complete server root path here
 require_once '<your site root directory path>/sites/all/libraries/vendor/autoload.php';
 
 use Nocarrier\Hal;
 
 $id = $_GET['id'];
 
+//ADD your SITE URL and KEYS here in the REST code below
 $json = file_get_contents('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={"sequential":1,"id":'.$id.'}&api_key=yourkey&key=sitekey');
 
 $array = json_decode($json, true);
@@ -77,7 +78,8 @@ $data= array(
 if($method == "DELETE"){
     header("HTTP/1.0 404 Not Found");
     echo "The person's record has been deleted successfully.";
-
+    
+    //ADD your SITE URL and KEYS here in the REST code below
     $ch = curl_init('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=delete&json={"sequential":1,"id":'.$id.'}&api_key=yourkey&key=sitekey');
 
     curl_setopt_array($ch, array(   
@@ -98,14 +100,14 @@ if($method == "DELETE"){
 
 //PUT
 elseif($method == "PUT"){
+    //ADD your SITE URL and KEYS here in the REST code below
+    $ch = curl_init('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=create&json={"sequential":1,"id":'.$id.',"contact_type":"Individual","first_name":"'.$given_name.'","middle_name":"'.$additional_name.'","last_name":"'.$family_name.'","gender_id":"'.$gender.'","api.Address.create":{"location_type_id":"'.$location_type_id.'","street_address":"'.$postal_addresses.'"},"api.Email.create":{"email":"'.$email.'"},"api.Phone.create":{"phone":'.$phone.'}}&api_key=yourkey&key=sitekey');
 
-$ch = curl_init('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=create&json={"sequential":1,"id":'.$id.',"contact_type":"Individual","first_name":"'.$given_name.'","middle_name":"'.$additional_name.'","last_name":"'.$family_name.'","gender_id":"'.$gender.'","api.Address.create":{"location_type_id":"'.$location_type_id.'","street_address":"'.$postal_addresses.'"},"api.Email.create":{"email":"'.$email.'"},"api.Phone.create":{"phone":'.$phone.'}}&api_key=yourkey&key=sitekey');
-
-curl_setopt_array($ch, array(
-    CURLOPT_CUSTOMREQUEST => "PUT",
-    CURLOPT_HEADER => FALSE,
-    CURLOPT_RETURNTRANSFER => TRUE,
-    CURLOPT_HTTPHEADER => array(
+    curl_setopt_array($ch, array(
+         CURLOPT_CUSTOMREQUEST => "PUT",
+         CURLOPT_HEADER => FALSE,
+         CURLOPT_RETURNTRANSFER => TRUE,
+         CURLOPT_HTTPHEADER => array(
         //'Authorization: '.$authToken,
         'Content-Type: application/json'
     ),
@@ -120,10 +122,10 @@ if($response === FALSE){
 
 }
 
-
-
+//ADD your SITE URL and KEYS here in the REST code below
 $json = file_get_contents('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={"sequential":1,"id":'.$id.'}&api_key=yourkey&key=sitekey');
 
+//ADD your SITE URL and KEYS here in the REST code below
 $json3 = file_get_contents('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=Address&action=get&json={"sequential":1,"id":'.$id.'}&api_key=yourkey&key=sitekey');
 
 $array = json_decode($json, true);
