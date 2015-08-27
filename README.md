@@ -4,12 +4,16 @@ Open Supporter Data Interface (OSDI) is a way for progressive US-based organizat
 
 With the implementation of the OSDI API by an organization using CiviCRM, and coming OSDI implementations by these (and other) progressive data and software vendors, supporter data from NGP VAN, ShareProgress, Salsa and the Action Network can be synced to that organization’s CiviCRM installation. Similarly, CiviCRM data will be able to be synchronized to these other applications.
 
-* [Overview](https://github.com/anuditverma/org.civicrm.osdi#overview)
-* [Benefits of a common API](https://github.com/anuditverma/org.civicrm.osdi#benefits-of-a-common-api)
-* [About](https://github.com/anuditverma/org.civicrm.osdi#about-orgcivicrmosdi-extension)
-* [Getting Started](https://github.com/anuditverma/org.civicrm.osdi#getting-started)
-* [Usage](https://github.com/anuditverma/org.civicrm.osdi#usage)
-* [Updating](https://github.com/anuditverma/org.civicrm.osdi#updating)
+- [Overview](https://github.com/anuditverma/org.civicrm.osdi#overview)
+- [Benefits of a common API](https://github.com/anuditverma/org.civicrm.osdi#benefits-of-a-common-api)
+- [About](https://github.com/anuditverma/org.civicrm.osdi#about-orgcivicrmosdi-extension)
+- [Getting Started](https://github.com/anuditverma/org.civicrm.osdi#getting-started)
+ - [Installation](https://github.com/anuditverma/org.civicrm.osdi#installation)
+ - [Setting up keys](https://github.com/anuditverma/org.civicrm.osdi#setting-up-keys)
+ - [Configure the extension](https://github.com/anuditverma/org.civicrm.osdi#configure-the-extension--adding-yoursite-url-and-keys)
+ - [Setup Hal-browser (Optional)](https://github.com/anuditverma/org.civicrm.osdi#setup-hal-browser-optional)
+- [Usage](https://github.com/anuditverma/org.civicrm.osdi#usage)
+- [Updating](https://github.com/anuditverma/org.civicrm.osdi#updating)
 
 ## Overview
 
