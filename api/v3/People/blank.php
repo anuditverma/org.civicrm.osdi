@@ -1,5 +1,5 @@
 <?php
-
+//ADD your SITE URL and KEYS here in these three REST codes below
 $json = file_get_contents('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={"sequential":1}&options[limit]=0&api_key=yourkey&key=sitekey');
 
 $json2 = file_get_contents('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=DashboardContact&action=get&json={"sequential":1}&api_key=yourkey&key=sitekey');
