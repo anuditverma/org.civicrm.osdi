@@ -20,7 +20,7 @@
   <compatibility>
     <ver>4.2</ver>
   </compatibility>
-  <comments>This is a new, undeveloped module</comments>
+  <comments>This module is in aplha stage</comments>
   <civix>
     <namespace>CRM/Osdi</namespace>
   </civix>
