@@ -96,7 +96,7 @@ You need to add these values in the following files. (Helper comments are presen
 ## Updating
 To update the extension follow the steps,
 - Disable the extension first (Go to Administer -> System Settings -> Manage Extensions)
-- Uninstall the extension
+- Uninstall the extension.
 - Then in the extension directory do a ``` git pull ``` via terminal.
 - Re-install and enable the extension again.
 
