@@ -75,23 +75,25 @@ $data= array(
 
 //DELETE
 if($method == "DELETE"){
+    header("HTTP/1.0 404 Not Found");
+    echo "The person's record has been deleted successfully.";
 
     $ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=delete&json={"sequential":1,"id":'.$id.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
 
- curl_setopt_array($ch, array(   
-    CURLOPT_CUSTOMREQUEST => "DELETE",
-    CURLOPT_HEADER => false,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_HTTPHEADER => array(
+    curl_setopt_array($ch, array(   
+        CURLOPT_CUSTOMREQUEST => "DELETE",
+        CURLOPT_HEADER => false,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => array(
         //'Authorization: '.$authToken,
         'Content-Type: application/json'
     )));
 
-$response = curl_exec($ch);
+    $response = curl_exec($ch);
 
-if($response === FALSE){
-    die(curl_error($ch));
-    }
+    if($response === FALSE){
+     die(curl_error($ch));
+     }
 }
 
 //PUT
