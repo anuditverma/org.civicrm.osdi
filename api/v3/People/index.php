@@ -6,13 +6,13 @@ include 'blank.php';
 
 include 'country_codes.php';
 
-require_once '/srv/www/buildkit/build/drupal-demo/sites/all/libraries/vendor/autoload.php';
+require_once '<your site root directory path>/sites/all/libraries/vendor/autoload.php';
 
 use Nocarrier\Hal;
 
 $count=sizeof($array['values']);
 
-$hal = new \Nocarrier\Hal('/sites/default/ext/osdi/api/v3/People/index.php', ['per_page' => $count,'page' => 1,'total_records' => $count]);
+$hal = new \Nocarrier\Hal('/sites/default/ext/org.civicrm.osdi/api/v3/People/index.php', ['per_page' => $count,'page' => 1,'total_records' => $count]);
 
 foreach($array['values'] as $key => $value){
     $i = $array['values'][$key]['id'];
@@ -46,11 +46,11 @@ foreach($array['values'] as $key => $value){
         )
     );
 
-$resource->addLink('self', '/sites/default/ext/osdi/api/v3/People/person.php'.'?id='.$i);
+$resource->addLink('self', '/sites/default/ext/org.civicrm.osdi/api/v3/People/person.php'.'?id='.$i);
 
 $hal->addResource('osdi-people', $resource);
 }
-$hal->addLink('next', '/sites/default/ext/osdi/api/v3/People'.'?page='.($page+1));
-$hal->addLink('previous', '/sites/default/ext/osdi/api/v3/People'.'?page='.($page-1));
+$hal->addLink('next', '/sites/default/ext/org.civicrm.osdi/api/v3/People'.'?page='.($page+1));
+$hal->addLink('previous', '/sites/default/ext/org.civicrm.osdi/api/v3/People'.'?page='.($page-1));
 
 echo $hal->asJson();
