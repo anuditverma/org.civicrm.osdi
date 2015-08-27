@@ -4,6 +4,7 @@
 
 The OSDI API implementation is in line with CiviCRM's mission to be an open platform for organizations of all sizes. Creating the implementation will allow them to use the OSDI API easily. The existence of a common API will reduce progressive data vendors’ customer costs related to moving data between different systems, lower integration costs and enhance the ability of innovators to create products for the marketplace. You can learn more about OSDI at www.opensupporter.org
 
+## Contents:
 - [About](https://github.com/anuditverma/org.civicrm.osdi#about-orgcivicrmosdi-extension)
 - [Getting Started](https://github.com/anuditverma/org.civicrm.osdi#getting-started)
  - [Installation](https://github.com/anuditverma/org.civicrm.osdi#installation)
