@@ -61,7 +61,7 @@ You can also perform these specified actions above through its interface. A NON-
 ## Getting Started
 
 ### Installation
-- Pre-reqiste:
+- Pre-requisite:
  - Assuming you have an up and running CiviCRM site.
  - You need to [enable extensions](http://wiki.civicrm.org/confluence/display/CRMDOC/Extensions) in CiviCRM.
 - Next Steps: 
