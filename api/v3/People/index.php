@@ -6,6 +6,7 @@ include 'blank.php';
 
 include 'country_codes.php';
 
+//ADD your complete server root path here
 require_once '<your site root directory path>/sites/all/libraries/vendor/autoload.php';
 
 use Nocarrier\Hal;
