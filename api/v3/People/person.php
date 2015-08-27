@@ -4,13 +4,13 @@ header("Content-Type:application/hal+json");
 
 include 'country_codes.php';
 
-require_once '/srv/www/buildkit/build/drupal-demo/sites/all/libraries/vendor/autoload.php';
+require_once '<your site root directory path>/sites/all/libraries/vendor/autoload.php';
 
 use Nocarrier\Hal;
 
 $id = $_GET['id'];
 
-$json = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={"sequential":1,"id":'.$id.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+$json = file_get_contents('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={"sequential":1,"id":'.$id.'}&api_key=yourkey&key=sitekey');
 
 $array = json_decode($json, true);
 
@@ -78,7 +78,7 @@ if($method == "DELETE"){
     header("HTTP/1.0 404 Not Found");
     echo "The person's record has been deleted successfully.";
 
-    $ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=delete&json={"sequential":1,"id":'.$id.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+    $ch = curl_init('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=delete&json={"sequential":1,"id":'.$id.'}&api_key=yourkey&key=sitekey');
 
     curl_setopt_array($ch, array(   
         CURLOPT_CUSTOMREQUEST => "DELETE",
@@ -99,7 +99,7 @@ if($method == "DELETE"){
 //PUT
 elseif($method == "PUT"){
 
-$ch = curl_init('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=create&json={"sequential":1,"id":'.$id.',"contact_type":"Individual","first_name":"'.$given_name.'","middle_name":"'.$additional_name.'","last_name":"'.$family_name.'","gender_id":"'.$gender.'","api.Address.create":{"location_type_id":"'.$location_type_id.'","street_address":"'.$postal_addresses.'"},"api.Email.create":{"email":"'.$email.'"},"api.Phone.create":{"phone":'.$phone.'}}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+$ch = curl_init('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=create&json={"sequential":1,"id":'.$id.',"contact_type":"Individual","first_name":"'.$given_name.'","middle_name":"'.$additional_name.'","last_name":"'.$family_name.'","gender_id":"'.$gender.'","api.Address.create":{"location_type_id":"'.$location_type_id.'","street_address":"'.$postal_addresses.'"},"api.Email.create":{"email":"'.$email.'"},"api.Phone.create":{"phone":'.$phone.'}}&api_key=yourkey&key=sitekey');
 
 curl_setopt_array($ch, array(
     CURLOPT_CUSTOMREQUEST => "PUT",
@@ -122,15 +122,15 @@ if($response === FALSE){
 
 
 
-$json = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={"sequential":1,"id":'.$id.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+$json = file_get_contents('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=People&action=get&json={"sequential":1,"id":'.$id.'}&api_key=yourkey&key=sitekey');
 
-$json3 = file_get_contents('http://camus.fuzion.co.nz/sites/all/modules/civicrm/extern/rest.php?entity=Address&action=get&json={"sequential":1,"id":'.$id.'}&api_key=9BivcYv1cOT7md6Rxom8Stiz&key=gNhqb5uGUaiLAHrZ');
+$json3 = file_get_contents('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=Address&action=get&json={"sequential":1,"id":'.$id.'}&api_key=yourkey&key=sitekey');
 
 $array = json_decode($json, true);
 $array3 = json_decode($json3, true);
 
 foreach($array['values'] as $key => $value){
-$hal = new \Nocarrier\Hal('/sites/default/ext/osdi/api/v3/People/person.php'.'?id='.$id,
+$hal = new \Nocarrier\Hal('/sites/default/ext/org.civicrm.osdi/api/v3/People/person.php'.'?id='.$id,
    ['given_name' => $array['values'][$key]['given_name'],
     'family_name' => $array['values'][$key]['family_name'],
         'email_addresses' => array(
