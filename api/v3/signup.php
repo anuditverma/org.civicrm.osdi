@@ -27,7 +27,7 @@ $data= array(
     'phone' => $phone,
     'gender' => $gender,
 );
-//ADD your SITE URL and KEYS in the line of code below
+//ADD your SITE URL and KEYS in the line of code below. This can be your own site or the target site where you want to POST the data.
  $ch = curl_init('<your CiviCRM site>/sites/all/modules/civicrm/extern/rest.php?entity=Contact&action=create&json={"sequential":1,"contact_type":"Individual","first_name":"'.$given_name.'","middle_name":"'.$additional_name.'","last_name":"'.$family_name.'","gender_id":"'.$gender.'","api.Address.create":{"location_type_id":"'.$location_type_id.'","street_address":"'.$postal_addresses.'"},"api.Email.create":{"email":"'.$email.'"},"api.Phone.create":{"phone":'.$phone.'}}&api_key=yourkey&key=sitekey');
 
 curl_setopt_array($ch, array(
