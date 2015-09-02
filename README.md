@@ -65,8 +65,9 @@ You need to add these values in the following files. (Helper comments are presen
 - In order to access the AEP you need to load the osdi.php file into the HAL-browser and then you can explore the other APIs' ends.
 
 ## Usage
-- Having this extension up and running on your site, you can use HAL-browser to request POST (GET) and NON-POST (POST, PUT & DELETE) requests to your own site. Also you can do the same from your site to an another site where this extension is enabled.
+- Having this extension up and running on your site, you can use HAL-browser to request POST (GET) and NON-GET (POST, PUT & DELETE) requests to your own site. Also you can do the same from your site to an another site where this extension is enabled.
 - For exchanging the data between these two said sites, you just need to change the site URLs to the URLs of the target site and also you need to know the API key and SITE key of that target site and then change these values in the code by following these steps mentioned above.
+- Follow this [example](https://github.com/anuditverma/org.civicrm.osdi/blob/master/example.md) to know more about NON-GET (POST, PUT & DELETE) requests.
 
 ## Updating
 To update the extension follow the steps,
