@@ -1,5 +1,5 @@
 Package: org.civicrm.osdi
-Copyright (C) 2015, FIXME <FIXME>
+Copyright (C) 2015, Anudit Verma <verma.anudit@gmail.com>
 Licensed under the GNU Affero Public License 3.0 (below).
 
 -------------------------------------------------------------------------------
