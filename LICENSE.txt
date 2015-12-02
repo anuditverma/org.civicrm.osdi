@@ -635,7 +635,7 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    org.civicrm.osdi - Implementing the Open Supporter Data Interface (OSDI) API for CiviCRM
+    'org.civicrm.osdi' - Implementing the Open Supporter Data Interface (OSDI) API for CiviCRM
     Copyright (C) 2015  Anudit Verma
 
     This program is free software: you can redistribute it and/or modify
